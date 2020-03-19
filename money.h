@@ -18,14 +18,14 @@ class Money{
     friend void operator>>(MyLineEdit* edit, Money &m1);
         Money operator+ (const Money &m2);
         Money operator- (const Money &m2);
-        Money operator* (const Money &m2);
-        Money operator/ (const Money &m2);
+        Money operator* (const long num);
+        Money operator/ (const long num);
 
         bool operator== (const Money& m2);
         bool operator> (const Money& m2);
         bool operator< (const Money& m2);
 
-
+   static int count;
    private:
    long dolar, cent;
 
