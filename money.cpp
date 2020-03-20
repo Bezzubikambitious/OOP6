@@ -62,7 +62,7 @@ Money Money::operator/ (const Money &m2)
     return Money((this->dolar * m2.dolar + this->cent * m2.cent)/
                    (m2.dolar*m2.dolar + m2.cent * m2.cent),
                    (this->cent * m2.dolar - this->dolar * m2.cent)/
-                   (m2.dolar * m2.dolar + op2.cent * m2.cent));
+                   (m2.dolar * m2.dolar + m2.cent * m2.cent));
 }
 
 
@@ -76,11 +76,11 @@ void operator>>(MyLineEdit * edit, Money &m1)
 {
     if(edit->ID)
     {
-        m1.set_imagine(edit->text().toDouble());
+        m1.SetCent(edit->text().toDouble());
     }
     else
     {
-        m1.set_real(edit->text().toDouble());
+        m1.SetDolar(edit->text().toDouble());
     }
 }
 

@@ -24,7 +24,7 @@ class Money{
         bool operator== (const Money& m2);
         bool operator> (const Money& m2);
         bool operator< (const Money& m2);
-
+    std::string get_res();
    static int count;
    private:
    long dolar, cent;
