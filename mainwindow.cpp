@@ -6,8 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    First = new Money;
-    Second = new Money;
 
 }
 
@@ -24,3 +22,15 @@ void MainWindow::on_pushButton_clicked()
 
 
 
+
+void MainWindow::on_set_clicked()
+{
+    this->m1.SetDolar(ui->set_dollars1->text().toInt());
+    this->m1.SetCent(ui->set_cents1->text().toInt());
+}
+
+void MainWindow::on_set2_clicked()
+{
+    this->m2.SetDolar(ui->set_dollars2->text().toInt());
+    this->m2.SetCent(ui->set_cents2->text().toInt());
+}
