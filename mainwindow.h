@@ -21,6 +21,22 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_set_clicked();
+
+    void on_set2_clicked();
+
+    void on_sum_clicked();
+
+    void on_sub_clicked();
+
+    void on_multi_clicked();
+
+    void on_div_clicked();
+
+    void on_right_clicked();
+
+    void on_left_clicked();
+
 private:
     Ui::MainWindow *ui;
     Money m1;
