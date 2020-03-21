@@ -19,13 +19,25 @@ MainWindow::~MainWindow()
 void MainWindow::on_set_clicked()
 {
     this->m1.SetDolar(ui->set_dollars1->text().toInt());
-    this->m1.SetCent(ui->set_cents1->text().toInt());
+    int tmp = ui->set_cents1->text().toInt();
+    while (tmp>=100)
+    {// це якщо центів введуть багато
+        this->m1.SetDolar(this->m1.GetDolar()+1);
+        tmp -= 100;
+    }
+    this->m1.SetCent(tmp);
 }
 
 void MainWindow::on_set2_clicked()
 {
     this->m2.SetDolar(ui->set_dollars2->text().toInt());
-    this->m2.SetCent(ui->set_cents2->text().toInt());
+    int tmp = ui->set_cents2->text().toInt();
+    while (tmp>=100)
+    {
+        this->m2.SetDolar(this->m2.GetDolar()+1);
+        tmp -= 100;
+    }
+    this->m2.SetCent(tmp);
 }
 
 void MainWindow::on_sum_clicked()
