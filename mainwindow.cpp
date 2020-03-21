@@ -16,6 +16,7 @@ MainWindow::~MainWindow()
 
 
 
+
 void MainWindow::on_set_clicked()
 {
     this->m1.SetDolar(ui->set_dollars1->text().toInt());
@@ -61,18 +62,11 @@ void MainWindow::on_multi_clicked()
 
 void MainWindow::on_div_clicked()
 {
-    this->res = this->m1.operator*(this->m2);
-    ui->show_div->setText(QString::fromStdString(this->res.get_res()));
+    this->res = this->m1.operator/(this->m2);
+    ui->show_mul->setText(QString::fromStdString(this->res.get_res()));
 }
 
-void MainWindow::on_right_clicked()
-{
-    this->res = this->m1.operator>>(this->m2);
-    ui->show_right->setText(QString::fromStdString(this->res.get_res()));
-}
 
-void MainWindow::on_left_clicked()
-{
-    this->res = this->m1.operator<<(this->m2);
-    ui->show_left->setText(QString::fromStdString(this->res.get_res()));
-}
+
+
+

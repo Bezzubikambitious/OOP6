@@ -4,6 +4,7 @@
 #include <QTextEdit>
 #include <QLabel>
 #include <string>
+#include "editfor.h"
 class Money{
     public:
     Money();
@@ -15,15 +16,16 @@ class Money{
     void SetCent(long c);
     long GetCent() const;//coment
     friend void operator<<(QLabel* label, Money &m1);
-    friend void operator>>(MyLineEdit* edit, Money &m1);
+    friend void operator>>(Editfor* edit, Money &m1);
         Money operator+ (const Money &m2);
         Money operator- (const Money &m2);
-        Money operator* (const long num);
-        Money operator/ (const long num);
+        Money operator* (const Money &m2);
+        Money operator/ (const Money &m2);
 
         bool operator== (const Money& m2);
         bool operator> (const Money& m2);
         bool operator< (const Money& m2);
+        static long GetCount();
     std::string get_res();
    static int count;
    private:

@@ -24,6 +24,10 @@ Money::~Money()
 {
     --count;
 }
+long Money::GetCount()
+{
+    return count;
+}
 
 void Money::SetDolar(long d){
         dolar=d;
@@ -42,37 +46,64 @@ long Money::GetCent() const{
 
 Money Money::operator+ (const Money &m2)
 {
+    double param, fractpart, intpart;
+    Money tmp;
+    param=(1.0*this->dolar+0.01*this->cent)+(1.0*m2.dolar+0.01*m2.cent);
+    fractpart = modf (param , &intpart);
+    tmp.SetDolar((long)intpart);
+    tmp.SetCent((long)(fractpart*100));
+    return tmp;
     return Money(this->dolar+m2.dolar,
                    this->cent+m2.cent);
 }
 
 Money Money::operator- (const Money &m2)
 {
-    return Money(this->dolar - m2.dolar,
-                   this->cent - m2.cent);
+    double param, fractpart, intpart;
+    Money tmp;
+    param=(1.0*this->dolar+0.01*this->cent)-(1.0*m2.dolar+0.01*m2.cent);
+    fractpart = modf (param , &intpart);
+    tmp.SetDolar((long)intpart);
+    tmp.SetCent((long)(fractpart*100));
+    return tmp;
 }
 
 Money Money::operator* (const Money &m2)
 {
-    return Money(this->dolar * m2.dolar - this->cent * m2.cent,
-                   this->dolar * m2.cent + this->cent * m2.dolar);
+    double param, fractpart, intpart;
+    Money tmp;
+    param=(1.0*this->dolar+0.01*this->cent)-(1.0*m2.dolar+0.01*m2.cent);
+    fractpart = modf (param , &intpart);
+    tmp.SetDolar((long)intpart);
+    tmp.SetCent((long)(fractpart*100));
+    return tmp;
+
 }
 Money Money::operator/ (const Money &m2)
 {
-    return Money((this->dolar * m2.dolar + this->cent * m2.cent)/
-                   (m2.dolar*m2.dolar + m2.cent * m2.cent),
-                   (this->cent * m2.dolar - this->dolar * m2.cent)/
-                   (m2.dolar * m2.dolar + m2.cent * m2.cent));
+    double param, fractpart, intpart;
+    Money tmp;
+    param=(1.0*this->dolar+0.01*this->cent)/(1.0*m2.dolar+0.01*m2.cent);
+    fractpart = modf (param , &intpart);
+    tmp.SetDolar((long)intpart);
+    tmp.SetCent((long)(fractpart*100));
+    return tmp;
+
 }
 
+std::string Money::get_res()
+{
+    return std::to_string(this->dolar) + "," + std::to_string(this->cent);
+}
 
+//тутка
 
 void operator<<(QLabel*label,Money &m1)
 {
-    label->setText(QString::number(m1.dolar)+"+("+ QString::number(op.imagine) + ")i");
+    label->setText(QString::number(m1.dolar)+"+("+ QString::number(m1.cent) + ")i");
 }
 
-void operator>>(MyLineEdit * edit, Money &m1)
+void operator>>(Editfor * edit, Money &m1)
 {
     if(edit->ID)
     {
@@ -84,9 +115,4 @@ void operator>>(MyLineEdit * edit, Money &m1)
     }
 }
 
-
-std::string Money::get_res()
-{
-    return std::to_string(this->dolar) + "," + std::to_string(this->cent);
-}
 
