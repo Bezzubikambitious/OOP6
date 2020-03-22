@@ -15,7 +15,7 @@ class Money{
     long GetDolar() const ;
     void SetCent(long c);
     long GetCent() const;//coment
-    friend void operator<<(QLabel* label, Money &m1);
+    friend void operator<<(QLineEdit* edit, Money &m1);
     friend void operator>>(Editfor* edit, Money &m1);
         Money operator+ (const Money &m2);
         Money operator- (const Money &m2);

@@ -46,15 +46,14 @@ long Money::GetCent() const{
 
 Money Money::operator+ (const Money &m2)
 {
-    double param, fractpart, intpart;
-    Money tmp;
-    param=(1.0*this->dolar+0.01*this->cent)+(1.0*m2.dolar+0.01*m2.cent);
-    fractpart = modf (param , &intpart);
-    tmp.SetDolar((long)intpart);
-    tmp.SetCent((long)(fractpart*100));
-    return tmp;
-    return Money(this->dolar+m2.dolar,
-                   this->cent+m2.cent);
+    long cent=this->GetCent()+m2.GetCent();
+    long dolars=this->GetDolar()+m2.GetDolar();
+    while (cent>=100)
+    {// це якщо центів введуть багато
+        dolars++;
+        cent -= 100;
+    }
+   return Money(dolars, cent);
 }
 
 Money Money::operator- (const Money &m2)
@@ -66,13 +65,14 @@ Money Money::operator- (const Money &m2)
     tmp.SetDolar((long)intpart);
     tmp.SetCent((long)(fractpart*100));
     return tmp;
+
 }
 
 Money Money::operator* (const Money &m2)
 {
     double param, fractpart, intpart;
     Money tmp;
-    param=(1.0*this->dolar+0.01*this->cent)-(1.0*m2.dolar+0.01*m2.cent);
+    param=(1.0*this->dolar+0.01*this->cent)*(1.0*m2.dolar+0.01*m2.cent);
     fractpart = modf (param , &intpart);
     tmp.SetDolar((long)intpart);
     tmp.SetCent((long)(fractpart*100));
@@ -98,9 +98,9 @@ std::string Money::get_res()
 
 //тутка
 
-void operator<<(QLabel*label,Money &m1)
+void operator<<(QLineEdit*edit,Money &m1)
 {
-    label->setText(QString::number(m1.dolar)+"+("+ QString::number(m1.cent) + ")i");
+    edit->setText(QString::number(m1.GetDolar())+","+ QString::number(m1.GetCent()));
 }
 
 void operator>>(Editfor * edit, Money &m1)

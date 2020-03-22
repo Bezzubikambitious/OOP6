@@ -6,7 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    ui->set_dollars1->ID=0;
+    ui->set_dollars2->ID=0;
+    ui->set_cents1->ID=1;
+    ui->set_cents2->ID=1;
 }
 
 MainWindow::~MainWindow()
@@ -27,6 +30,8 @@ void MainWindow::on_set_clicked()
         tmp -= 100;
     }
     this->m1.SetCent(tmp);
+    ui->show_m1<<this->m1;
+    ui->statusbar->showMessage(QString::number(Money::count));
 }
 
 void MainWindow::on_set2_clicked()
@@ -39,31 +44,37 @@ void MainWindow::on_set2_clicked()
         tmp -= 100;
     }
     this->m2.SetCent(tmp);
+    ui->show_m2<<this->m2;
+    ui->statusbar->showMessage(QString::number(Money::count));
 }
 
 void MainWindow::on_sum_clicked()
 {
     this->res = this->m1.operator+(this->m2);
-    ui->show_sum->setText(QString::fromStdString(this->res.get_res()));
+    ui->show_sum<<this->res;
+    ui->statusbar->showMessage(QString::number(Money::count));
 }
 
 void MainWindow::on_sub_clicked()
 {
     this->res = this->m1.operator-(this->m2);
-    ui->show_sub->setText(QString::fromStdString(this->res.get_res()));
+    ui->show_sub<<this->res;
+    ui->statusbar->showMessage(QString::number(Money::count));
 }
 
 
 void MainWindow::on_multi_clicked()
 {
-    this->res = this->m1.operator*(this->m2);
-    ui->show_mul->setText(QString::fromStdString(this->res.get_res()));
+    this->res = this->m1*(this->m2);
+    ui->show_mul<<this->res;
+    ui->statusbar->showMessage(QString::number(Money::count));
 }
 
 void MainWindow::on_div_clicked()
 {
-    this->res = this->m1.operator/(this->m2);
-    ui->show_mul->setText(QString::fromStdString(this->res.get_res()));
+    this->res = this->m1/(this->m2);
+    ui->show_div<<this->res;
+    ui->statusbar->showMessage(QString::number(Money::count));
 }
 
 
